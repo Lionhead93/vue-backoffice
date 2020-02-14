@@ -8,14 +8,34 @@
     </v-list-item>
     <v-list shaped>
       <v-list-item-group v-model="select" color="primary">
-        <v-list-item v-for="(item, i) in menus" :key="i" :to="item.link">
-          <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <div v-for="(item, i) in menus" :key="i">
+          <div v-if="item.child !== undefined && item.child.length > 0">
+            <v-list-group>
+              <template v-slot:activator>
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <v-list-item v-for="(child, j) in item.child" :key="j" :to="child.link">
+                <v-list-item-icon>
+                  <v-icon>mdi-circle-medium</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title v-text="child.text"></v-list-item-title>
+              </v-list-item>
+            </v-list-group>
+          </div>
+          <v-list-item v-else :to="item.link">
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
@@ -45,15 +65,15 @@ export default {
     },
     select: {
       get() {
-        return this.$store.state.menuSeleted
+        return this.$store.state.app.menuSeleted
       },
       set(val) {
-        this.$store.state.menuSeleted = val
+        this.$store.state.app.menuSeleted = val
       }
     },
     menus: {
       get() {
-        return this.$store.state.menuItems
+        return this.$store.state.app.menuItems
       }
     }
   },

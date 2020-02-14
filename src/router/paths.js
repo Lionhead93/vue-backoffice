@@ -14,5 +14,10 @@ export default [
     path: '/exchange-list',
     name: '환전 내역',
     view: 'ExchangeList'
+  },
+  {
+    path: '/list-demo',
+    name: 'List Demo',
+    view: 'ListDemo'
   }
 ]

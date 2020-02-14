@@ -1,10 +1,6 @@
 // https://vuex.vuejs.org/en/state.html
+import constants from '@/config/constants'
 
 export default {
-  menuSeleted: null,
-  menuItems: [
-    { text: 'Home', icon: 'mdi-home', link: '/' },
-    { text: 'About', icon: 'mdi-alpha-a', link: '/about' },
-    { text: 'Exchange', icon: 'mdi-coin-outline', link: '/exchange-list' }
-  ]
+  constants: constants
 }
